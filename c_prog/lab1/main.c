@@ -4,16 +4,17 @@
 
 int main(const int argc, const char* argv[]) {
 
-  int   choice_id;
+  double  var_y;
+  double  var_x;
+  int     choice_id;
 
   printf("Please, type the number of equation to be computed: ");
   scanf("%d", &choice_id);
-
+  
   if (choice_id == 0) {
-    double  var_y;
+    
     double  param_a;
     double  param_b;
-    double  var_x;
     double  temp;
 
     printf("Роман Божко ТР-02, програма виводить значення кусково-заданої функції\n");
@@ -40,10 +41,9 @@ int main(const int argc, const char* argv[]) {
     }
     printf("Value of y: %lf\n", var_y);
   } else if (choice_id == 1) {
-    double  var_y;
+    
     double  param_a;
     double  param_b;
-    double  var_x;
     double  temp;
 
     printf("Роман Божко ТР-02, програма виводить результат функції у вигляді таблиці\n");
@@ -69,8 +69,7 @@ int main(const int argc, const char* argv[]) {
 
     printf("|Value of y|\n|%10lf|\n", var_y);
   } else if (choice_id == 2) {
-    double  var_y;
-    float   var_x;
+    
     const float  power_val = 3.0;
     
     printf("Роман Божко ТР-02, програма виводить значення функції у вигяді таблиці, якщо x змінюється на інтервалі [-1; +1] з кроком 0.1\n");
@@ -82,6 +81,9 @@ int main(const int argc, const char* argv[]) {
       printf("|%10lf|%10lf|\n", var_y, var_x);
       var_x += 0.1;
     }
+  }
+  else {
+    printf("Passed number isn't reserved for any equation\n");
   }
   
   return 0;
