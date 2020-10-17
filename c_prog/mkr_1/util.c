@@ -1,3 +1,5 @@
+#include "util.h"
+
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
@@ -7,8 +9,7 @@ char	*ft_strnew(size_t size)
 {
 	char	*temp;
 
-	return (((temp = (char*)malloc(size + 1)) == NULL) ? NULL :
-			ft_memset(temp, 0, size + 1));
+	return (((temp = (char*)malloc(size + 1)) == NULL) ? NULL : ft_memset(temp, 0, size + 1));
 }
 
 size_t		get_wordlen(const char *s, char c)
@@ -62,14 +63,3 @@ char	*ft_strncpy(char *dest, const char *src, size_t num)
 	return (dest);
 }
 
-void		ft_print_iarr(int *arr, size_t len)
-{
-	size_t		i;
-
-	i = 0;
-	while (i < len)
-	{
-		ft_putnbrendl(arr[i]);
-		i++;
-	}
-}
