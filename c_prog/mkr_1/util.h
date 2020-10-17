@@ -16,4 +16,10 @@ size_t	get_wordlen(const char *s, char c);
 int	ft_atoi(char *str);
 char	*ft_strncpy(char *dest, const char *src, size_t num);
 void	ft_print_iarr(int *arr, size_t len);
+int		ft_is_whitespace(char c);
+int		ft_isdigit(int c);
+void	*ft_memset(void *b, int c, size_t len);
+char	*ft_strdup(const char *s);
+void	ft_intswap(int *ar1, int *ar2);
+size_t	ft_strlen(const char *str);
 #endif

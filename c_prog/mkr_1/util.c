@@ -113,3 +113,13 @@ void	ft_intswap(int *ar1, int *ar2)
 	*ar1 = *ar2;
 	*ar2 = temp;
 }
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while(str[i] != '\0')
+		i++;
+	return (i);
+}

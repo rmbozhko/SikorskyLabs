@@ -28,10 +28,10 @@ int*		get_decypher_matrix(const char* matrix) {
 
 
 int		main(const int argc, const char* argv[]) {
-	char*	matrix = (char*)ft_strdup("1 4 3 9");
-	char*	msg = (char*)ft_strdup("tt");
+	char*	matrix = ft_strdup("1 4 3 9");
+	char*	msg = ft_strdup("tt");
 
-	int*	dec_matrix = get_decypher_matrix("1 2 3 4");
+	int*	dec_matrix = get_decypher_matrix("0 0 0 0");
 	for (size_t i = 0; i < MATRIX_LEN; i++)
-		printf("i[%d]:%d", i, dec_matrix[i]);
+		printf("i[%d]:%d\n", i, dec_matrix[i]);
 }
