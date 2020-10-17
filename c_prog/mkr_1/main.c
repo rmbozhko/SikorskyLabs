@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "util.h"
 
 #define MATRIX_ROW_LEN 2
 #define MATRIX_LEN (MATRIX_ROW_LEN * MATRIX_ROW_LEN)
@@ -20,9 +21,9 @@ int*		get_decypher_matrix(const char* matrix) {
 	i = 0;
 	dec_matrix = (int*)malloc(sizeof(int) * MATRIX_LEN + 1);
 	for (size_t j = 0; j < MATRIX_LEN; j++) {	
-		temp = strnew(INT_MAX_LEN);
+		temp = ft_strnew(INT_MAX_LEN);
 		wordlen = get_wordlen(matrix + i, ' ')
-		dec_matrix[j] = atoi(strncpy(temp, matrix + i, wordlen));
+		dec_matrix[j] = ft_atoi(ft_strncpy(temp, matrix + i, wordlen));
 		i += wordlen + 1; // we increment i additionally to pass a space position
 		free(temp);
 	}
