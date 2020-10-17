@@ -61,3 +61,15 @@ char	*ft_strncpy(char *dest, const char *src, size_t num)
 		*temp++ = 0;
 	return (dest);
 }
+
+void		ft_print_iarr(int *arr, size_t len)
+{
+	size_t		i;
+
+	i = 0;
+	while (i < len)
+	{
+		ft_putnbrendl(arr[i]);
+		i++;
+	}
+}
