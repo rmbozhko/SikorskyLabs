@@ -123,3 +123,10 @@ size_t	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
+
+bool	ft_is_integer(double val)
+{
+	int	truncated;
+
+	truncated = (int)val;
+	return (val == truncated);
