@@ -1,11 +1,27 @@
 #include "util.h"
 
+/*
+ *Message manipulation functions
+ */
 void		print_decrypted_msg(int* msg_vector) {
 	for (size_t i = 0; i < MSG_LEN; i++)
 		putchar((char)(msg_vector[i] + 96));
 	putchar('\n');
 }
 
+int*		get_encoded_msg(const char* msg) {
+	int*	dec_msg;
+
+	dec_msg = (int*)malloc(sizeof(int) * MSG_LEN);
+	for (size_t i = 0; i < MSG_LEN; i++) {
+		dec_msg[i] = ((int)msg[i] - 96);
+	}
+	return (dec_msg);
+}
+
+/*
+ *Converting matrix from char* to int arr
+ */
 int*		get_decypher_matrix(const char* matrix) {
 	size_t	i;
 	int*	dec_matrix;
@@ -24,6 +40,9 @@ int*		get_decypher_matrix(const char* matrix) {
 	return (dec_matrix);
 }
 
+/*
+ *Matrices manipulation functions
+ */
 int		get_matrix_determinant(const int* dec_matrix) {
 
 	return ((dec_matrix[0] * dec_matrix[3]) - (dec_matrix[1] * dec_matrix[2]));
@@ -31,8 +50,8 @@ int		get_matrix_determinant(const int* dec_matrix) {
 
 
 int*		get_adj_matrix(int* dec_matrix) {	
-	ft_intswap(dec_matrix[0], dec_matrix[3]);	
-	ft_intswap(dec_matrix[1], dec_matrix[2]);
+	ft_intswap(&dec_matrix[0], &dec_matrix[3]);	
+	ft_intswap(&dec_matrix[1], &dec_matrix[2]);
 	dec_matrix[1] = (-1) * dec_matrix[1];	
 	dec_matrix[2] = (-1) * dec_matrix[2];
 
@@ -40,31 +59,29 @@ int*		get_adj_matrix(int* dec_matrix) {
 }
 
 void		transpose_matrix(int* adj_matrix) {	
-	ft_intswap(dec_matrix[1], dec_matrix[2]);
-	return (adj_matrix);	
+	ft_intswap(&adj_matrix[1], &adj_matrix[2]);
 }
 
-void		multiply_by_const(int* adj_matrix, const int determinant) {
-	for (size_t i = 0; i < MATRIX_LEN; i++)
-		adj_matrix[i] = adj_matrix[i] * (1/determinant);
-}
-
-void		normalize_elem(int* maxtrix_elem, size_t k, int determinant) {
+void		normalize_elem(int* matrix_elem, size_t k, int determinant) {
 	int	temp;
 
-	temp = maxtrix_elem
-	if (inv_matrix[i] < 0 || !ft_is_integer(inv_matrix[i] / determinant))
+	temp = (*matrix_elem + (26 * k)) / determinant;
+	if (*matrix_elem < 0 || !ft_is_integer(*matrix_elem / determinant))
+		normalize_elem(matrix_elem, k + 1, determinant);
+	else {
+		*matrix_elem += (26 * k);
+		return ;
+	}
 
 }
 
-void		normalize_matrix_elems(int* inv_matrix, size_t k, int determinant) {
+void		normalize_matrix_elems(int* inv_matrix, int determinant) {
 	int	temp;
 
 	for (size_t i = 0; i < MATRIX_LEN; i++) {
 		if (inv_matrix[i] < 0 || !ft_is_integer(inv_matrix[i] / determinant))
-			normalize_elem(&inv_matrix[i], 0, determinant);
-		else
-			inv_matrix[i] /= determinant;
+			normalize_elem(&inv_matrix[i], 1, determinant);
+		inv_matrix[i] /= determinant;
 	}
 }
 
@@ -72,8 +89,8 @@ int*		get_inverse_matrix(int* dec_matrix) {
 	int	determinant;
 	int*	adj_matrix;
 
-	delimiter = get_matrix_determinant(dec_matrix);
-	if (delimiter == 0){
+	determinant = get_matrix_determinant(dec_matrix);
+	if (determinant	== 0){
 		printf("Передана матриця - вироджена");
 		free(dec_matrix);
 		exit(1);
@@ -81,19 +98,9 @@ int*		get_inverse_matrix(int* dec_matrix) {
 		
 	adj_matrix = get_adj_matrix(dec_matrix);
 	transpose_matrix(adj_matrix);
-	//multiply_by_const(adj_matrix, delimiter);
-	
+	normalize_matrix_elems(adj_matrix, determinant);	
 }
 
-int*		get_encoded_msg(const char* msg) {
-	int*	dec_msg;
-
-	dec_msg = (int*)malloc(sizeof(int) * MSG_LEN);
-	for (size_t i = 0; i < MSG_LEN; i++) {
-		dec_msg[i] = ((int)msg[i] - 96);
-	}
-	return (dec_msg);
-}
 
 void		multiply_matrices(int* dec_msg, const int* inv_matrix) {
 	int	temp0;
@@ -106,7 +113,7 @@ void		multiply_matrices(int* dec_msg, const int* inv_matrix) {
 }
 
 int		main(const int argc, const char* argv[]) {
-	int*	dec_matrix = get_decypher_matrix("1 2 3 4");
+	int*	dec_matrix = get_decypher_matrix("1 4 3 9");
 	int*	inv_matrix = get_inverse_matrix(dec_matrix);
 	int*	dec_msg = get_encoded_msg("tt");
 	multiply_matrices(inv_matrix, dec_msg);

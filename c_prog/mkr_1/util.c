@@ -130,3 +130,4 @@ bool	ft_is_integer(double val)
 
 	truncated = (int)val;
 	return (val == truncated);
+}

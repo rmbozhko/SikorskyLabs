@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdbool.h>
 
 #define MATRIX_ROW_LEN 2
 #define MATRIX_LEN (MATRIX_ROW_LEN * MATRIX_ROW_LEN)
