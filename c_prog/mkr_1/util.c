@@ -63,3 +63,53 @@ char	*ft_strncpy(char *dest, const char *src, size_t num)
 	return (dest);
 }
 
+int		ft_is_whitespace(char c)
+{
+	return ((c == ' ' || c == '\t' || c == '\n' ||
+		c == '\v' || c == '\f' || c == '\r') ? (1) : (0));
+}
+
+int		ft_isdigit(int c)
+{
+	return ((c >= 48 && c <= 57) ? (1) : (0));
+}
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	int i;
+
+	i = 0;
+	while (len-- != 0)
+		((unsigned char *)b)[i++] = (unsigned char)c;
+	return (b);
+}
+
+char	*ft_strdup(const char *s)
+{
+	char	*temp;
+	int		i;
+
+	temp = (char*)malloc((sizeof(char) * ft_strlen(s)) + 1);
+	if (temp == NULL)
+		return (NULL);
+	else
+	{
+		i = 0;
+		while (s[i] != '\0')
+		{
+			temp[i] = s[i];
+			i++;
+		}
+		temp[i] = '\0';
+	}
+	return (temp);
+}
+
+void	ft_intswap(int *ar1, int *ar2)
+{
+	int		temp;
+
+	temp = *ar1;
+	*ar1 = *ar2;
+	*ar2 = temp;
+}
