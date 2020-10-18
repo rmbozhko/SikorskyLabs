@@ -63,26 +63,48 @@ void		transpose_matrix(int* adj_matrix) {
 }
 
 void		normalize_elem(int* matrix_elem, size_t k, int determinant) {
-	int	temp;
+	long double	temp;
+	bool		cond;
 
-	temp = (*matrix_elem + (26 * k)) / determinant;
-	if (*matrix_elem < 0 || !ft_is_integer(*matrix_elem / determinant))
+	cond = ((*matrix_elem < 0 || *matrix_elem > 0)&& determinant < 0);
+
+	//if ((*matrix_elem < 0 || *matrix_elem > 0)&& determinant < 0)
+	//{
+	//	temp = ((-1) * (*matrix_elem) + (26 * k));
+	//	temp /= ((-1) * determinant);
+	//}
+	//else
+		temp = (((cond) ? (-1) : (1)) * (*matrix_elem) + (26 * k));
+		temp /= ((cond) ? (-1) : (1)) * determinant;
+	printf("det:%d, k:%d\n", determinant, k);
+	printf("mat_elem:%d, temp:%Lf\n", *matrix_elem, temp);
+	if (temp < 0.0 || !ft_is_integer(temp)) // need to test recursion
 		normalize_elem(matrix_elem, k + 1, determinant);
-	else {
-		*matrix_elem += (26 * k);
+	else
+		*matrix_elem = temp;
+}
+
+void		increment_elem(int* matrix_elem, size_t k) {
+	if ((*matrix_elem + 26 * k)> 0) {
+		*matrix_elem += 26 * k;
 		return ;
 	}
-
+	increment_elem(matrix_elem, k + 1);	
 }
 
 void		normalize_matrix_elems(int* inv_matrix, int determinant) {
-	int	temp;
-
 	for (size_t i = 0; i < MATRIX_LEN; i++) {
-		if (inv_matrix[i] < 0 || !ft_is_integer(inv_matrix[i] / determinant))
-			normalize_elem(&inv_matrix[i], 1, determinant);
-		inv_matrix[i] /= determinant;
+		printf("elem:%d\n", inv_matrix[i]);
+		if ((inv_matrix[i] % determinant) == 0) {
+			inv_matrix[i] /= determinant;
+			(inv_matrix[i] < 0) ? increment_elem(&inv_matrix[i], 1) : 0;
+		}
+		else
+			normalize_elem(&inv_matrix[i], 1, determinant);			
 	}
+	for (size_t i = 0; i < MATRIX_LEN; i++)
+		printf("inv_mat[%d]:%d\n", i, inv_matrix[i]);
+	exit(0);
 }
 
 int*		get_inverse_matrix(int* dec_matrix) {
@@ -90,15 +112,19 @@ int*		get_inverse_matrix(int* dec_matrix) {
 	int*	adj_matrix;
 
 	determinant = get_matrix_determinant(dec_matrix);
-	if (determinant	== 0){
+	if (determinant	== 0) {
 		printf("Передана матриця - вироджена");
 		free(dec_matrix);
 		exit(1);
 	}
-		
+	//printf("%d\n", determinant);
 	adj_matrix = get_adj_matrix(dec_matrix);
 	transpose_matrix(adj_matrix);
+	for (size_t i = 0; i < MATRIX_LEN; i++)
+		printf("i[%d]:%d\n", i, adj_matrix[i]);
 	normalize_matrix_elems(adj_matrix, determinant);	
+	for (size_t i = 0; i < MATRIX_LEN; i++)
+		printf("inv[%d]:%d\n", i, adj_matrix[i]);
 }
 
 
@@ -114,14 +140,16 @@ void		multiply_matrices(int* dec_msg, const int* inv_matrix) {
 
 int		main(const int argc, const char* argv[]) {
 	int*	dec_matrix = get_decypher_matrix("1 4 3 9");
+	//for (size_t i = 0; i < MATRIX_LEN; i++)
+	//	printf("i[%d]:%d\n", i, dec_matrix[i]);
 	int*	inv_matrix = get_inverse_matrix(dec_matrix);
+	for (size_t i = 0; i < MATRIX_LEN; i++)
+		printf("inverted[%d]:%d\n", i, inv_matrix[i]);
 	int*	dec_msg = get_encoded_msg("tt");
 	multiply_matrices(inv_matrix, dec_msg);
 	print_decrypted_msg(dec_msg);
-	for (size_t i = 0; i < MATRIX_LEN; i++)
-		printf("i[%d]:%d\n", i, dec_matrix[i]);
 	for (size_t i = 0; i < MSG_LEN; i++)
-		printf("i[%d]:%d\n", i, dec_msg[i]);
+		printf("msg[%d]:%d\n", i, dec_msg[i]);
 	free(dec_msg);
 	free(dec_matrix);
 }
