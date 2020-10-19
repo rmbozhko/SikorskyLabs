@@ -46,7 +46,6 @@ int*		get_decypher_matrix(const char* matrix) {
  */
 
 void		print_inverse_matrix(const int* matrix) {
-	printf("Inverse matrix A\n");
 	for (size_t i = 0; i < MATRIX_LEN; i += 2)
 		printf("|%d %d|\n", matrix[i], matrix[i + 1]);
 }
@@ -76,17 +75,9 @@ void		normalize_elem(int* matrix_elem, size_t k, int determinant) {
 
 	cond = ((*matrix_elem < 0 || *matrix_elem > 0)&& determinant < 0);
 
-	//if ((*matrix_elem < 0 || *matrix_elem > 0)&& determinant < 0)
-	//{
-	//	temp = ((-1) * (*matrix_elem) + (26 * k));
-	//	temp /= ((-1) * determinant);
-	//}
-	//else
 		temp = (((cond) ? (-1) : (1)) * (*matrix_elem) + (26 * k));
 		temp /= ((cond) ? (-1) : (1)) * determinant;
-	//printf("det:%d, k:%d\n", determinant, k);
-	//printf("mat_elem:%d, temp:%Lf\n", *matrix_elem, temp);
-	if (temp < 0.0 || !ft_is_integer(temp)) // need to test recursion
+	if (temp < 0.0 || !ft_is_integer(temp))
 		normalize_elem(matrix_elem, k + 1, determinant);
 	else
 		*matrix_elem = temp;
@@ -141,12 +132,17 @@ int		main(const int argc, const char* argv[]) {
 	int*	dec_matrix;
 	int*	inv_matrix;
 	int*	dec_msg;
+  int   init_matrix[4] = {1, 4, 3, 9};
 	
 	dec_matrix = get_decypher_matrix("1 4 3 9");
 	inv_matrix = get_inverse_matrix(dec_matrix);
-	print_inverse_matrix(inv_matrix);
+	printf("Initial matrix A\n");
+  print_inverse_matrix(init_matrix);
+  printf("Inverse matrix (A^(-1))\n");
+  print_inverse_matrix(inv_matrix);
 	dec_msg = get_encoded_msg("tt");
 	multiply_matrices(dec_msg, inv_matrix);
+  printf("Initial message: %s\n", "tt");
 	print_decrypted_msg(dec_msg);
 	free(dec_msg);
 	free(dec_matrix);
