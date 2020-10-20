@@ -6,7 +6,7 @@
 void		print_decrypted_msg(int* msg_vector) {
 	printf("Decrypted message: ");
 	for (size_t i = 0; i < MSG_LEN; i++)
-		putchar((char)(msg_vector[i] + 96));
+		putchar((char)(msg_vector[i] + 97));
 	putchar('\n');
 }
 
@@ -15,7 +15,7 @@ int*		get_encoded_msg(const char* msg) {
 
 	dec_msg = (int*)malloc(sizeof(int) * MSG_LEN);
 	for (size_t i = 0; i < MSG_LEN; i++) {
-		dec_msg[i] = ((int)msg[i] - 96);
+		dec_msg[i] = ((int)msg[i] - 97);
 	}
 	return (dec_msg);
 }
@@ -132,18 +132,19 @@ int		main(const int argc, const char* argv[]) {
 	int*	dec_matrix;
 	int*	inv_matrix;
 	int*	dec_msg;
-  int   init_matrix[4] = {1, 4, 3, 9};
 	
-	dec_matrix = get_decypher_matrix("1 4 3 9");
+	dec_matrix = get_decypher_matrix("6 9 3 5");
 	inv_matrix = get_inverse_matrix(dec_matrix);
-	printf("Initial matrix A\n");
-  print_inverse_matrix(init_matrix);
-  printf("Inverse matrix (A^(-1))\n");
-  print_inverse_matrix(inv_matrix);
-	dec_msg = get_encoded_msg("tt");
+	printf("Inverse matrix (A^(-1))\n");
+	print_inverse_matrix(inv_matrix);
+	dec_msg = get_encoded_msg("dv");
 	multiply_matrices(dec_msg, inv_matrix);
-  printf("Initial message: %s\n", "tt");
 	print_decrypted_msg(dec_msg);
 	free(dec_msg);
+	dec_msg = get_encoded_msg("dz");
+	multiply_matrices(dec_msg, inv_matrix);
+	print_decrypted_msg(dec_msg);
+	free(dec_msg);
+	
 	free(dec_matrix);
 }
