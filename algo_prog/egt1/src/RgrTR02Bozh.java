@@ -7,7 +7,7 @@ public class RgrTR02Bozh {
     }
     private final static int n = 10;
 
-    public static double     task1() {
+    public static double        task1() {
         double  outer_var;
 
         outer_var = 0.0;
@@ -27,10 +27,11 @@ public class RgrTR02Bozh {
         return (outer_var);
     }
 
-    public static int     task2(int n) {
+    public static int           task2(int n) {
         int     res;
 
         res = 0;
+        // TODO: Algo improvements: move from O(n) -> O(sqrt(n))
         for (int i = 1; i <= n; i++) {
             if (n % i == 0) {
                 System.out.print(i + " ");
@@ -45,7 +46,7 @@ public class RgrTR02Bozh {
         double      eq_res;
 
         eq_res = task1();
-        System.out.printf("%.4f\n", eq_res);
+        System.out.printf("Result of equation: %.4f\n", eq_res);
 
         readInput temp = () -> {
             Scanner     scan;
