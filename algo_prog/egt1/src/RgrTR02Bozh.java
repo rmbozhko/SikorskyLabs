@@ -7,7 +7,7 @@ public class RgrTR02Bozh {
     }
     private final static int n = 10;
 
-    public static double        task1() {
+    private static double        task1() {
         double  outer_var;
 
         outer_var = 0.0;
@@ -15,19 +15,23 @@ public class RgrTR02Bozh {
             double  in_var;
 
             in_var = 1.0;
+            if (k == 5) // divisor is 0 in case k = 5
+                continue;
             for (int i = 1; i < (k + 1); i++) {
-                in_var = Math.pow(i, 2);
+                if (i == 4) // divisor is 0 in case i = 4
+                    continue;
+                in_var *= Math.pow(i, 2);
                 in_var -= 16;
                 in_var = i / in_var;
             }
-            outer_var = Math.pow(-2, k + 1);
+            outer_var += Math.pow(-2, k + 1);
             outer_var /= (k - 5);
             outer_var *= in_var;
         }
         return (outer_var);
     }
 
-    public static int           task2(int n) {
+    private static int           task2(int n) {
         int     res;
 
         res = 0;
@@ -44,7 +48,6 @@ public class RgrTR02Bozh {
 
         eq_res = task1();
         System.out.printf("Result of equation: %.4f\n", eq_res);
-
         readInput temp = () -> {
             Scanner     scan;
             int         arg;
@@ -56,11 +59,11 @@ public class RgrTR02Bozh {
                     System.out.print("Enter natural number: ");
                     arg = scan.nextInt();
                     if (arg == Integer.MAX_VALUE || arg < 1) {
-                        throw new java.util.InputMismatchException("Inappropriate value was passed\n");
+                        throw new java.util.InputMismatchException("Inappropriate value was passed");
                     }
                     return arg;
                 } catch (java.util.InputMismatchException e) {
-                    continue;
+                    System.out.println(e.getMessage());
                 }
             }
         };
