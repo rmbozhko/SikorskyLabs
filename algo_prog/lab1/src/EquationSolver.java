@@ -110,8 +110,7 @@ public class EquationSolver {
     }
 
     public void     displayDate() {
-        Date date = new Date();
-        String format = new SimpleDateFormat("MMMM dd yyyy E", new Locale("uk", "UA")).format(date);
+        String format = String.format(new Locale("uk", "UA"),"%tB %<td %<tY %<ta", new Date());
         System.out.println(format);
     }
 
