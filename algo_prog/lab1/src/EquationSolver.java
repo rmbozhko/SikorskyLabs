@@ -11,6 +11,14 @@ public class EquationSolver {
     private double      y;
     private double      d;
 
+    public EquationSolver() {}
+
+    public EquationSolver(double a, double b, double x) {
+        this.setA(a);
+        this.setB(b);
+        this.setX(x);
+    }
+
     public void setA(double a) {
         if (a <= 0.0)
             throw new IllegalArgumentException("Argument 'a' equals or less than 0");
@@ -102,8 +110,7 @@ public class EquationSolver {
     }
 
     public void     displayDate() {
-        Date date = new Date();
-        String format = new SimpleDateFormat("MMMM dd yyyy E", new Locale("uk", "UA")).format(date);
+        String format = String.format(new Locale("uk", "UA"),"%tB %<td %<tY %<ta", new Date());
         System.out.println(format);
     }
 
