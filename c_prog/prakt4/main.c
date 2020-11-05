@@ -5,6 +5,7 @@
 
 void  	ft_swap(int *a, int *b) {
   int   temp;
+
   temp = *a;
   *a = *b;
   *b = temp;
@@ -55,4 +56,5 @@ int   	main(void) {
   printf("\nMatrix was rotated vertically through its center\n\n");
   print_matrix(bi_iarr);
   free_matrix(bi_iarr);
+  return (0);
 }
