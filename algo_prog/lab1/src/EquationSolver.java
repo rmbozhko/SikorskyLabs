@@ -19,7 +19,7 @@ public class EquationSolver {
         this.setX(x);
     }
 
-    public void setA(double a) {
+    public void setA(double a) throws IllegalArgumentException {
         if (a <= 0.0)
             throw new IllegalArgumentException("Argument 'a' equals or less than 0");
         this.a = a;
@@ -29,7 +29,7 @@ public class EquationSolver {
         this.b = b;
     }
 
-    public void setX(double x) {
+    public void setX(double x) throws IllegalArgumentException {
         if (x == 0.0 | x == (Math.PI/2))
             throw new IllegalArgumentException("Argument 'x' equals to 0 or Pi/2");
         this.x = x;
