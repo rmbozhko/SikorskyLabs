@@ -2,7 +2,7 @@ import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class RgrTR02Bozh {
+public class RgrTr02Bozh {
     interface readInput {
         int readInputArgument();
     }
@@ -12,13 +12,13 @@ public class RgrTR02Bozh {
         double  outer_var;
 
         outer_var = 0.0;
-        for (int k = 0; k < n; k++) {
+        for (int k = 0; k <= n; k++) {
             if (k == 5) // divisor is 0 in case k = 5
                 continue;
             double  in_var;
 
             in_var = 1.0;
-            for (int i = 1; i < (k + 1); i++) {
+            for (int i = 1; i <= (k + 1); i++) {
                 if (i == 4) // divisor is 0 in case i = 4
                     continue;
                 double temp;
@@ -27,9 +27,7 @@ public class RgrTR02Bozh {
                 temp -= 16.0;
                 in_var *= i / temp;
             }
-            outer_var += Math.pow(-2, k + 1);
-            outer_var /= (k - 5);
-            outer_var *= in_var;
+            outer_var += (Math.pow(-2, k + 1) * in_var) / (k - 5);
         }
         return (outer_var);
     }
