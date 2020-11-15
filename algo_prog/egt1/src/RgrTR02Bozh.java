@@ -8,22 +8,24 @@ public class RgrTR02Bozh {
     }
     private final static int n = 10;
 
-    private static double        task1() {
+    private static double           task1() {
         double  outer_var;
 
         outer_var = 0.0;
         for (int k = 0; k < n; k++) {
+            if (k == 5) // divisor is 0 in case k = 5
+                continue;
             double  in_var;
 
             in_var = 1.0;
-            if (k == 5) // divisor is 0 in case k = 5
-                continue;
             for (int i = 1; i < (k + 1); i++) {
                 if (i == 4) // divisor is 0 in case i = 4
                     continue;
-                in_var *= Math.pow(i, 2);
-                in_var -= 16;
-                in_var = i / in_var;
+                double temp;
+
+                temp = Math.pow(i, 2);
+                temp -= 16.0;
+                in_var *= i / temp;
             }
             outer_var += Math.pow(-2, k + 1);
             outer_var /= (k - 5);
@@ -32,7 +34,7 @@ public class RgrTR02Bozh {
         return (outer_var);
     }
 
-    private static int           task2(int n) {
+    private static int              task2(int n) {
         int     res;
 
         res = 0;
@@ -44,7 +46,7 @@ public class RgrTR02Bozh {
         return (res);
     }
 
-    public static void      main(String[] args) {
+    public static void              main(String[] args) {
         double      eq_res;
 
         eq_res = task1();
@@ -60,7 +62,7 @@ public class RgrTR02Bozh {
                     System.out.print("Enter natural number: ");
                     arg = scan.nextInt();
                     if (arg == Integer.MAX_VALUE || arg < 1) {
-                        throw new java.util.InputMismatchException("Inappropriate value was passed");
+                        throw new InputMismatchException("Inappropriate value was passed");
                     }
                     return arg;
                 } catch (java.util.InputMismatchException e) {
