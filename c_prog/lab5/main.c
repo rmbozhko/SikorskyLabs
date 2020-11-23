@@ -52,6 +52,6 @@ int		main(void) {
 	sort(arr, bubble_sort);
 	printf("Sorted array: ");
 	print_arr(arr);
-  free(arr);
+	free(arr);
 	return (0);
 }
