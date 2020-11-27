@@ -73,7 +73,8 @@ public class Lab3 {
                     arg = scan.nextDouble();
                     return arg;
                 } catch (java.util.InputMismatchException e) {
-                    System.out.println(e.getMessage());
+                    System.out.println("Invalid input. Try again.");
+                    scan.nextLine();
                 }
             }
         };
