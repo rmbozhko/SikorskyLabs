@@ -23,12 +23,10 @@ def getMSE(arr):
 
 # TO-DO: Check the main flow
 def getRelativeError(data):
-    n = len(data)
     dataMean = mean(data)
     temp = data
     absoleteError = sum(list(map(lambda dataPoint: dataPoint - dataMean, temp)))
-   	#absoleteError = temp / n
     temp = data
-    relativeError = list(map(lambda dataPoint: absoleteError / dataPoint, temp))
+    relativeError = absoleteError / dataMean
     return relativeError
     
