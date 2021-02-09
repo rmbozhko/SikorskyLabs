@@ -26,8 +26,8 @@ def getRelativeError(data):
     n = len(data)
     dataMean = mean(data)
     temp = data
-    temp = sum(list(map(lambda dataPoint: dataPoint - dataMean, temp)))
-    absoleteError = temp / n
+    absoleteError = sum(list(map(lambda dataPoint: dataPoint - dataMean, temp)))
+   	#absoleteError = temp / n
     temp = data
     relativeError = list(map(lambda dataPoint: absoleteError / dataPoint, temp))
     return relativeError
