@@ -27,30 +27,3 @@ def getRelativeError(data):
     absoleteErrors = list(map(lambda dataPoint: dataPoint - dataMean, temp))
     relativeErrors = list(map(lambda dataPoint: abs(dataPoint / dataMean), absoleteErrors)) # is abs necessary?
     return mean(relativeErrors)
-
-def dataToTable(data, columns = None):
-    if len(data) == 0 :  
-        display(HTML('<b>Нема данних</b>'))
-        return
-    
-    hdr = ''
-    if columns != None:
-        for col in columns: # Формируем заголовок таблицы
-            hdr = hdr + '<th>' + col + '</th>'
-            
-        hdr = '<tr>' + hdr + '</tr>'
-
-    dt = ''
-    for row in data: # Проходим циклом по всем строкам
-        dt = dt + '<tr>'
-        for cell in row: # И формируем тело таблицы
-        	if isinstance(cell, Interable) :
-        		for e in cell:
-        			dt = dt + '<td>' + str(e) + '</td>'
-            else:
-            	dt = dt + '<td>' + str(cell) + '</td>'
-        dt = dt + '</tr>'
-            
-    display(HTML('<table>' + hdr + dt + '</table>')) # Выводим таблицу на экран
-
-dataToTable(tabledata, columns=["Номер досліду","h, м", "t, c", "<t>, c", "t^{2}, c^{2}"])
