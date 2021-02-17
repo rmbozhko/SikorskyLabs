@@ -1,16 +1,25 @@
+/*
+  Лабораторна робота №1
+  В завданні необхідно виводити меню і отримувати дані від користувача до тих пір, поки він не надішле 5. Якщо він надіслав 5, то необхідно успішно завершити програму.
+
+  gcc main.c -o main
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 int 	menu(char** men) {
-	int 	id;
-
-	for (int i = 0; men[i] != "\0"; ++i) {
+	int 	menu_id; // зберігає ввід користувача з консолі
+	for (int i = 0; i < 5; ++i) {
 		printf("%s\n", men[i]);
 	}
 	printf("Введіть, будь ласка, число:\n");
-	scanf(&i, id);
-	if (id >= 1 && id <= 5) {
-		return (id);
+	scanf("%d", &menu_id);
+  // Перевіряємо отриманий індекс на правильність
+	if (menu_id >= 1 && menu_id <= 5) {
+		return (menu_id);
 	} else {
 		return (-1);
 	}
@@ -38,36 +47,46 @@ void exitFun(int i) {
 
 int main(int argc, char const *argv[])
 {
-	char**	men = ["1. Insert", "2. Find", "3. Delete", "4. Edit", "5. Exit"];
-	bool 	exit_flag = false;
-	int 	id = menu(men);
-	if (id == -1) {
-		 return (-1);
-	}
+	char**	men = (char**)malloc(sizeof(char) * 10 * 5); // містить лістинг меню
+  // Записуємо назви варіантів до меню в купу
+  men[0] = "1. Insert";
+  men[1] = "2. Find";
+  men[2] = "3. Delete";
+  men[3] = "4. Edit";
+  men[4] = "5. Exit";
+	bool 	exit_selected = false; // флажок для перевірки вводу 5
+	
 	while (true) {
-		switch (id) {
+    int 	menu_id = menu(men); // містить обраний номер меню
+	  // У випадку, якщо переданий індекс не відповідає меню, завершимо програму з кодом помилки
+    if (menu_id == -1) {
+		  return (-1);
+	  }
+		switch (menu_id) {
 			case 1:
-				insertFun(id);
+				insertFun(menu_id);
 				break;
 			case 2:
-				findFun(id);
+				findFun(menu_id);
 				break;
 			case 3:
-				deleteFun(id);
+				deleteFun(menu_id);
 				break;
 			case 4:
-				editFun(id);
+				editFun(menu_id);
 				break;
 			case 5:
-				exitFun(id);
-				exit_flag = true;
+				exitFun(menu_id);
+				exit_selected = true;
 				break;
 			default:
 				printf("No element selected\n");
 		}
-		if (exit_flag) {
+		if (exit_selected) {
 			break ;
-		}
-	}
-	return 0;
+	  }
+  }
+  // Звільюємо пам'ять виділену на початку роботи програми.
+  free(men);
+  return (0);
 }
