@@ -48,13 +48,13 @@ int			ft_lstlen(t_personal_data* lst) {
 }
 
 void		ft_lst_print(t_personal_data* elem, int len) {
-	printf("%10s|%10s|%15s|%15s|%20s|%3d|%3d|%10s|%6s\n",
+	printf("%10s|%10s|%15s|%15s|%20s|%10s|%10s|%10s|%6s\n",
 			"Призвіще", "Ім'я", "По-батькові", "Місто", "Вулиця", "Номер будинку", "Номер квартири", "Номер телефону", "Курсор");
 	t_personal_data* temp = elem;
 	elem = ft_lst_to_head(elem);
 	elem = (len == 1) ? temp : elem; //Повертаємося на переданий елемент списку, якщо хочемо вивести тільки його
 	while (len > 0) {
-		printf("%10s|%10s|%15s|%15s|%20s|%3d|%3d|%10s\n", 
+		printf("%10s|%10s|%15s|%15s|%20s|%3ld|%3ld|%10s|%6s\n", 
 			elem->surname, elem->name, elem->father_name, elem->city_name, elem->street_name,
 			elem->house_number, elem->appartment_number, elem->phone_number, (temp == elem) ? "<<--" : "");
 		elem = elem->next;
@@ -75,42 +75,42 @@ void		ft_lst_delete(t_personal_data* elem) {
 	prev->next = next;
 	next->prev = prev;
 
-	free(surname);
-	free(name);
-	free(father_name);
-	free(city_name);
-	free(street_name);
-	free(phone_number);
+	free(elem->surname);
+	free(elem->name);
+	free(elem->father_name);
+	free(elem->city_name);
+	free(elem->street_name);
+	free(elem->phone_number);
 	free(elem);
 }
 
-t_personal_data		ft_lst_elem_new() {
+t_personal_data*		ft_lst_elem_new() {
 	t_personal_data*	elem;
-	char*				temp_str;
+	char*				temp;
 
 	elem = (t_personal_data*)malloc(sizeof(t_personal_data*));
 	printf("Введіть ім'я: ");
-	scanf("%s", &temp);
-	memcpy(elem->name, temp);
+	scanf("%s", temp);
+	memcpy(elem->name, temp, strlen(temp));
 	printf("Введіть призвіще: ");
-	scanf("%s", &temp);
-	memcpy(elem->surname, temp);
+	scanf("%s", temp);
+	memcpy(elem->surname, temp, strlen(temp));
 	printf("Введіть по-батькові: ");
-	scanf("%s", &temp);
-	memcpy(elem->father_name, temp);
+	scanf("%s", temp);
+	memcpy(elem->father_name, temp, strlen(temp));
 	printf("Введіть назву міста: ");
-	scanf("%s", &temp);
-	memcpy(elem->city_name, temp);
+	scanf("%s", temp);
+	memcpy(elem->city_name, temp, strlen(temp));
 	printf("Введіть назву вулиці: ");
-	scanf("%s", &temp);
-	memcpy(elem->street_name, temp);
+	scanf("%s", temp);
+	memcpy(elem->street_name, temp, strlen(temp));
 	printf("Введіть номер будинку: ");
-	scanf("%d", &elem->house_number);
+	scanf("%ld", &elem->house_number);
 	printf("Введіть номер квартири: ");
-	scanf("%d", &elem->appartment_number);
+	scanf("%ld", &elem->appartment_number);
 	printf("Введіть номер телефону: ");
-	scanf("%s", &temp);
-	memcpy(elem->phone_number, temp);
+	scanf("%s", temp);
+	memcpy(elem->phone_number, temp, strlen(temp));
 
 	return (elem);
 }
@@ -131,10 +131,10 @@ t_personal_data*		ft_lst_insert(t_personal_data* head, t_personal_data* new_elem
 t_personal_data*		ft_insert_element(t_personal_data* lst) {
 	t_personal_data*		new_elem;
 	int 					menu_id;
-
+  
 	new_elem = ft_lst_elem_new();
-	
-	menu_id = menu({"1. Вставити новий елемент до поточного", "2. Вставити елемент після поточного"}, 2);
+	char* men[] = {"1. Вставити новий елемент до поточного", "2. Вставити елемент після поточного"};
+	menu_id = menu(men, 2);
 	if (menu_id != -1 && new_elem) {
 		if (menu_id == 2) {
 			ft_lst_insert(lst, new_elem);
@@ -148,12 +148,12 @@ t_personal_data*		ft_insert_element(t_personal_data* lst) {
 }
 
 void		ft_lst_append(t_personal_data* elem, t_personal_data* new_elem) {
-	elem = ft_lst_to_tail();
+	elem = ft_lst_to_tail(elem);
 	elem->next = new_elem;
 	elem = elem->next;
 }
 
 t_personal_data*	ft_find_elem(t_personal_data* elem) {
-	elem = ft_lst_to_head();
+	elem = ft_lst_to_head(elem);
 
 }

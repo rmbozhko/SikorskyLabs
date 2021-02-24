@@ -1,6 +1,6 @@
 #include "list.h"
 
-int 	menu(char** men, size_t len) {
+int 	menu(char* men[], size_t len) {
 	int 	menu_id; // зберігає ввід користувача з консолі
 	for (int i = 0; i < len; ++i) {
 		printf("%s\n", men[i]);
@@ -17,7 +17,7 @@ int 	menu(char** men, size_t len) {
 
 int		show_menu() {
 	// містить лістинг меню
-	char**	men = {"1. New", "2. Find", "3. To Head", "4. To Tail", "5. Next", "6. Previous",
+	char*	men[] = {"1. New", "2. Find", "3. To Head", "4. To Tail", "5. Next", "6. Previous",
 					"7. Show", "8. List", "9. Insert", "10. Delete", "11. Count", "12. Exit"};
 
 	bool 				exit_selected = false; // флажок для перевірки вводу Exit
