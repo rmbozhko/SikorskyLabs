@@ -80,13 +80,13 @@ int main(int argc, char const *argv[])
 				exit_selected = true;
 				break;
 			default:
-				printf("No element selected\n");
+				std::cout << "No element selected" << std::endl;
 		}
 		if (exit_selected) {
 			break ;
 	  }
   }
   // Звільюємо пам'ять виділену на початку роботи програми.
-  free(men);
+  delete men;
   return (0);
 }

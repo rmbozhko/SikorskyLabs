@@ -1,6 +1,6 @@
 #include "list.h"
 
-int 	menu(char** men, size_t len) {
+int 	menu(char* men[], size_t len) {
 	int 	menu_id; // зберігає ввід користувача з консолі
 	for (int i = 0; i < len; ++i) {
 		printf("%s\n", men[i]);
@@ -17,20 +17,23 @@ int 	menu(char** men, size_t len) {
 
 int		show_menu() {
 	// містить лістинг меню
-	char**	men = {"1. New", "2. Find", "3. To Head", "4. To Tail", "5. Next", "6. Previous",
+	char*	men[] = {"1. New", "2. Find", "3. To Head", "4. To Tail", "5. Next", "6. Previous",
 					"7. Show", "8. List", "9. Insert", "10. Delete", "11. Count", "12. Exit"};
 
 	bool 				exit_selected = false; // флажок для перевірки вводу Exit
 	t_personal_data*	elem = NULL;
+  //elem = (t_personal_data*)malloc(sizeof(t_personal_data*));
+  //elem->
 	while (true) {
     int 	menu_id = menu(men, 12); // містить обраний номер меню
 	  // У випадку, якщо переданий індекс не відповідає меню, завершимо програму з кодом помилки
     if (menu_id == -1) {
 		  return (-1);
 	  }
-		switch (menu_id) {
+    switch (menu_id) {
 			case 1:
-				ft_lst_append(elem, ft_lst_elem_new());
+				elem = ft_lst_append(elem, ft_lst_elem_new());
+        printf("%s\n", elem->name);
 				break;
 			case 2:
 				elem = ft_find_elem(elem);
@@ -75,7 +78,6 @@ int		show_menu() {
   return (0);
 }
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]) {
 	return (show_menu());
 }

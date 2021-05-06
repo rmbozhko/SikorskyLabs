@@ -23,17 +23,17 @@ public class Lab3 {
         }
     }
 
-    public void     task1(double start, double end, double step) {
+    public void     task1(double start, double end, double h) {
         System.out.println("  x | y(x) |  z(x)  ");
-        for (double x = start; x <= end; x += step) {
+        for (double x = start; x <= end; x += h) {
             double temp = 3 * (x - 0.6);
             System.out.printf("%3.1f|%6.4f|%6.4f\n", x, Math.exp(temp), Math.asin(x));
         }
     }
 
-    public boolean  task2(int[] arr) {
+    public boolean  task2(double[] arr) {
         for (int i = 0; i < arr.length; i++) {
-            if (i + 1 < arr.length && arr[i] > arr[i + 1])
+            if (i + 1 < arr.length && arr[i] < arr[i + 1])
                 return Boolean.FALSE;
         }
         return Boolean.TRUE;
@@ -46,7 +46,7 @@ public class Lab3 {
         for (double i = 1.0; i <= 10.0; i += 1.0) {
             double numerator_temp = Math.pow(-1.0, i + 1.0);
             numerator_temp *= Factorial.factorial((int)i);
-            double delimiter_temp = Math.pow(2.0, (2 * i - 1));
+            double delimiter_temp = Math.pow(2.0, (2.0 * i - 1.0));
             delimiter_temp *= Math.sin(x);
             result += numerator_temp / delimiter_temp;
         }
@@ -55,12 +55,12 @@ public class Lab3 {
 
     public static void main(String[] args) {
         Lab3 test = new Lab3();
-        int[] arr_1 = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        int[] arr_2 = new int[]{78, 25, 21, 28, 49, 17, 87, 57, 82, 80};
+        double[] arr_1 = new double[]{5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5};
+        double[] arr_2 = new double[]{78.2, 2.5, -2.1, 28.2, -49, 17.14, 8.7, -57, 8.2, 80.104};
 
         test.task1(-1.0, 1.0, 0.05);
-        System.out.printf("Послідовність впорядкована: %b\n", test.task2(arr_1));
-        System.out.printf("Послідовність впорядкована: %b\n", test.task2(arr_2));
+        System.out.printf("Послідовність впорядкована за спаданням: %b\n", test.task2(arr_1));
+        System.out.printf("Послідовність впорядкована за спаданням: %b\n", test.task2(arr_2));
         readInput reader = () -> {
             Scanner scan;
             double arg;
