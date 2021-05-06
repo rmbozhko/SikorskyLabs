@@ -86,8 +86,8 @@ void		ft_lst_delete(t_personal_data* elem) {
 }
 
 t_personal_data*		ft_lst_elem_new() {
-	t_personal_data*	elem = NULL;
-	char				temp[50];
+	t_personal_data*	elem;
+	char*				temp;
 
 	elem = (t_personal_data*)malloc(sizeof(t_personal_data*));
 	printf("Введіть ім'я: ");
@@ -105,11 +105,23 @@ t_personal_data*		ft_lst_elem_new() {
 	memcpy(elem->father_name, temp, strlen(temp));
 	printf("Введіть назву міста: ");
 	scanf("%s", temp);
-  elem->city_name = (char*)malloc(sizeof(char) * 50);
+  	elem->city_name = (char*)malloc(sizeof(char) * 50);
 	memcpy(elem->city_name, temp, strlen(temp));
 	printf("Введіть назву вулиці: ");
 	scanf("%s", temp);
-  elem->street_name = (char*)malloc(sizeof(char) * 50);
+	elem->street_name = (char*)malloc(sizeof(char) * 50);
+	memcpy(elem->name, temp, strlen(temp));
+	printf("Введіть призвіще: ");
+	scanf("%s", temp);
+	memcpy(elem->surname, temp, strlen(temp));
+	printf("Введіть по-батькові: ");
+	scanf("%s", temp);
+	memcpy(elem->father_name, temp, strlen(temp));
+	printf("Введіть назву міста: ");
+	scanf("%s", temp);
+	memcpy(elem->city_name, temp, strlen(temp));
+	printf("Введіть назву вулиці: ");
+	scanf("%s", temp);
 	memcpy(elem->street_name, temp, strlen(temp));
 	printf("Введіть номер будинку: ");
 	scanf("%ld", &elem->house_number);
@@ -117,11 +129,12 @@ t_personal_data*		ft_lst_elem_new() {
 	scanf("%ld", &elem->appartment_number);
 	printf("Введіть номер телефону: ");
 	scanf("%s", temp);
-  elem->phone_number = (char*)malloc(sizeof(char) * 50);
+  	elem->phone_number = (char*)malloc(sizeof(char) * 50);
 	memcpy(elem->phone_number, temp, strlen(temp));
-  elem->next = NULL;
-  elem->prev = NULL;
+  	elem->next = NULL;
+  	elem->prev = NULL;
   
+	memcpy(elem->phone_number, temp, strlen(temp));
 	return (elem);
 }
 
@@ -168,8 +181,14 @@ t_personal_data*		ft_lst_append(t_personal_data* elem, t_personal_data* new_elem
   return elem;
 }
 
-t_personal_data*    ft_cmp_name(t_personal_data* elem, char* val) {
-  t_personal_data*  temp;
+void		ft_lst_append(t_personal_data* elem, t_personal_data* new_elem) {
+	elem = ft_lst_to_tail(elem);
+	elem->next = new_elem;
+	elem = elem->next;
+}
+
+t_personal_data*	ft_find_elem(t_personal_data* elem) {
+	elem = ft_lst_to_head(elem);
 
   temp = elem;
   while (temp) {
