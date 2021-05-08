@@ -123,6 +123,13 @@ int**   listToArr(Node** lists_arr, int size) {
   return arr;
 }
 
+void    deleteArr(int** arr, int size) {
+  for (int i = 0; i < size; i++) {
+    delete arr[i];
+  }
+  delete arr;
+}
+
 int main() {
   const char* filename = "data.txt";
   int**       arr;
@@ -140,6 +147,7 @@ int main() {
   sort(lists_arr, MATRIX_SIZE, selectionSort);
   print(lists_arr, MATRIX_SIZE);
 
+  deleteArr(arr, MATRIX_SIZE);
   std::cout << std::endl << "Sorted Array\n" << std::endl;
   arr = listToArr(lists_arr, MATRIX_SIZE);
   print(arr, MATRIX_SIZE);
