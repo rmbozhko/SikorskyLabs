@@ -3,8 +3,10 @@
 #include <string>
 #include <fstream>
 #include <functional>
+#include "Node.hpp"
 
 #define MATRIX_SIZE 10
+
 
 int** readData(const char* filename) {
   std::ifstream infile(filename);
