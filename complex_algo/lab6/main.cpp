@@ -60,9 +60,9 @@ void  print(Node** lists_arr, int size) {
 
 Node*   nodeInit(int* arr, int j, int size, Node* prev_node) {
   if (j == size - 1) {
-    return new Node(arr[j]);
+    return (arr[j] != 0) ? new Node(arr[j]) : NULL;
   }
-  return new Node(arr[j], nodeInit(arr, j + 1, size, prev_node));
+  return (arr[j] != 0) ? new Node(arr[j], nodeInit(arr, j + 1, size, prev_node)) : nodeInit(arr, j + 1, size, prev_node);
 }
 
 Node**  arrToList(int** arr, int size) {
