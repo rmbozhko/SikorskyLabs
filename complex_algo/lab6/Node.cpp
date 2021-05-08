@@ -5,8 +5,7 @@ Node::Node(int value_, Node* next_) {
   next = next_;
 }
 
-Node::Node(int val) {
-  Node(val, NULL);
+Node::Node(int val) : Node(val, NULL) {
 }
 
 Node* Node::getNext() {

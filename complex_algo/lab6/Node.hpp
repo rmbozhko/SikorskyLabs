@@ -1,6 +1,8 @@
 #ifndef NODE_HPP
 #define NODE_HPP
 
+#include <cstddef>
+
 class Node
 {
   private:
@@ -10,9 +12,8 @@ class Node
   public:
     Node(int);
     Node(int, Node*);
-    ~Node();
     int   getValue();
     Node* getNext();
 };
 
-#ifndef
+#endif
