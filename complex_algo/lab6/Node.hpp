@@ -7,12 +7,15 @@ class Node
 {
   private:
     int   value;
+    int   position;
     Node* next;
 
   public:
-    Node(int);
-    Node(int, Node*);
+    Node(int, int);
+    Node(int, int, Node*);
     int   getValue();
+    void  setValue(int);
+    int   getPosition();
     Node* getNext();
 };
 
