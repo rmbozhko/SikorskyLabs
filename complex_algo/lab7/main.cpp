@@ -4,6 +4,7 @@
 #include <vector>
 #include <sstream>
 #include <iterator>
+#include <algorithm>
 
 std::vector<int> readData(const char* filename, const char delim, int& value) {
   std::fstream      newfile;
@@ -40,9 +41,29 @@ std::vector<int> readData(const char* filename, const char delim, int& value) {
   return {};
 }
 
+std::vector<int>  findValueRepresentation(std::vector<int> coins, int value) {
+  std::vector<int>    repr;
+  int                 coin;
+
+  for(std::vector<int>::size_type i = 0; i != coins.size();) {
+    coin = coins[i];
+    if (value >= coin) {
+      value -= coin;
+      repr.push_back(coin);
+    } else {
+      i++;
+    }
+  }
+
+  return (repr);
+}
+
+bool sort_cmp (int i, int j) { return (i > j); }
+
 int main(const int argc, const char* argv[]) {
   int               value;
   std::vector<int>  coins;
+  std::vector<int>  value_repr;
 
   value = 0;
   if (argc > 1) {
@@ -51,10 +72,21 @@ int main(const int argc, const char* argv[]) {
       std::cerr << "Invalid data passed" << std::endl;
       return (-1);
     }
+    // Displaying read data
     std::cout << "Task: represent " << value << " with minimal number of elements from { ";
     std::copy(coins.begin(), coins.end(),
         std::ostream_iterator<int>(std::cout, " "));
     std::cout << "}" << std::endl;
+
+    // Find representation
+    std::sort(coins.begin(), coins.end(), sort_cmp);
+    value_repr = findValueRepresentation(coins, value);
+
+    // Displaying the representation result
+    std::cout << "Value representation: " << std::endl;
+    std::copy(value_repr.begin(), value_repr.end(),
+        std::ostream_iterator<int>(std::cout, " "));
+    std::cout << std::endl;
   } else {
     std::cerr << "No file provided" << std::endl;
     return (-1);
