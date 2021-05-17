@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <iterator>
 
 std::vector<int> readData(const char* filename, const char delim, int& value) {
   std::fstream      newfile;
@@ -30,14 +31,19 @@ std::vector<int> readData(const char* filename, const char delim, int& value) {
 }
 
 int main(const int argc, const char* argv[]) {
-  int value;
+  int               value;
+  std::vector<int>  coins;
 
   value = 0;
   if (argc > 1) {
-    readData(argv[1], ' ', value);
-    std::cout << value << std::endl;
+    coins = readData(argv[1], ' ', value);
+    std::cout << "Task: represent " << value << " with minimal number of elements from { ";
+    std::copy(coins.begin(), coins.end(),
+        std::ostream_iterator<int>(std::cout, " "));
+    std::cout << "}" << std::endl;
   } else {
     std::cerr << "No file provided" << std::endl;
+    return (-1);
   }
-  
+  return (0);
 }
