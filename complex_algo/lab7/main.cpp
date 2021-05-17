@@ -50,6 +50,8 @@ std::vector<int>  findValueRepresentation(std::vector<int> coins, int value) {
     if (value >= coin) {
       value -= coin;
       repr.push_back(coin);
+    } else if (value < coin && i == coins.size() - 1) {
+      throw "Impossible";
     } else {
       i++;
     }
@@ -80,7 +82,13 @@ int main(const int argc, const char* argv[]) {
 
     // Find representation
     std::sort(coins.begin(), coins.end(), sort_cmp);
-    value_repr = findValueRepresentation(coins, value);
+    try {
+      value_repr = findValueRepresentation(coins, value);
+    } catch (const char* e) {
+      std::cerr << e << std::endl;
+      return (-1);
+    }
+    
 
     // Displaying the representation result
     std::cout << "Value representation: " << std::endl;
