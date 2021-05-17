@@ -18,16 +18,26 @@ std::vector<int> readData(const char* filename, const char delim, int& value) {
     getline(newfile, temp);
     
     std::stringstream ss(temp);
-    std::string s;
+    std::string       s;
+    int               elem;
     while (std::getline(ss, s, delim)) {
-      coins_values.push_back(stoi(s));
+      elem = stoi(s);
+      if (elem > 0 && elem < 1000000) {
+        coins_values.push_back(stoi(s));
+      } else {
+        return {};
+      }
     }
     getline(newfile, temp);
     value = stoi(temp);
-
     newfile.close();
+    
+    if ((coins_num > 0 && coins_num <= 100 && coins_num == coins_values.size()) &&
+      (value > 0 && value < 5000000)) {
+        return coins_values;
+      }
   }
-  return coins_values;
+  return {};
 }
 
 int main(const int argc, const char* argv[]) {
@@ -37,6 +47,10 @@ int main(const int argc, const char* argv[]) {
   value = 0;
   if (argc > 1) {
     coins = readData(argv[1], ' ', value);
+    if (coins.empty()) {
+      std::cerr << "Invalid data passed" << std::endl;
+      return (-1);
+    }
     std::cout << "Task: represent " << value << " with minimal number of elements from { ";
     std::copy(coins.begin(), coins.end(),
         std::ostream_iterator<int>(std::cout, " "));
