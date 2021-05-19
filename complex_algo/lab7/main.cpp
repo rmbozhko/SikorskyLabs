@@ -45,7 +45,7 @@ std::vector<int>  findValueRepresentation(std::vector<int> coins, int value) {
   std::vector<int>    repr;
   int                 coin;
 
-  for(std::vector<int>::size_type i = 0; i != coins.size();) {
+  for(std::vector<int>::size_type i = 0; i != coins.size() && value != 0;) {
     coin = coins[i];
     if (value >= coin) {
       value -= coin;
