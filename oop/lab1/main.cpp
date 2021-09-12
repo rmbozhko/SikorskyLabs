@@ -32,6 +32,7 @@ class FuncParams {
     double getDX() { return dx; }
     double getX1() { return x1; }
     double getX2() { return x2; }
+    double getValue(int i) { return values[i]; }
 
     int setA(int a) { this->a = a; }
     int setB(int b) { this->b = b; }
@@ -113,24 +114,41 @@ double*  rand(FuncParams* params) {
   std::cout << "**********\n" << "*   " << s1 << "   *\n" << "*   " << s2 << "   *\n";
   rnd[0] = (rand() % (int)sMax) + sMin;
   std::cout << "*   " << std::setprecision(2) << rnd[0] << "   *\n";
-  for (int i = 1; i <= size; i++) {
+  for (int i = 1; i < size; i++) {
     rnd[i] = (rand() % (int)sMax) + rnd[i - 1] + step;
     std::cout << "*   " << std::setprecision(2) << rnd[i] << "   *\n";
   }
   std::cout << "**********" << std::endl;
-  
+
   return rnd;
+}
+
+void  Print(FuncParams* params) {
+  std::cout << "\n\n\nY\n^" << std::endl;
+  int size = params->getFuncArrayLength();
+  int max = 0;
+  for (int i = 0; i < size; i++) {
+    int spaces_len = (int)(params->getValue(i) * (-10));
+    if (spaces_len > max) {
+      max = spaces_len;
+    }
+    std::cout << "|";
+    while (spaces_len--) {
+      std::cout << " ";
+    }
+    std::cout << "*" << std::endl;
+  }
+  while (max--) {
+    std::cout << "-";
+  }
+  std::cout << "> X" << std::endl;
 }
 
 int main(void) {
   FuncParams* params = new FuncParams(1, 5, 0.0792, -2, -0.1);
-  // params->funcValues();
 
-  //FuncParams* test = new FuncParams(1, 6, 0.2083, 0.5, 5.5);
-  //test->funcValues();
-
-  //FuncParams* test = ReadPar();
-  //test->funcValues();
+  FuncParams* test = ReadPar();
   Tab(params); 
   rand(params);
+  Print(params);
 }
