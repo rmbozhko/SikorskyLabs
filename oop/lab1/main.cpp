@@ -1,6 +1,7 @@
 #include <cmath>
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
 
 class FuncParams {
   private:
@@ -99,6 +100,28 @@ void  Tab(FuncParams* params) {
   std::cout << "**************************" << std::endl;
 }
 
+double*  rand(FuncParams* params) {
+  int size = params->getFuncArrayLength();
+  double s1 = params->findMinElemWithStep(2);
+  double s2 = params->findMinElemWithStep(1);
+  double* rnd = new double[size];
+  double sMax = (s1 > s2) ? s1 : s2;
+  double sMin = (s1 < s2) ? s1 : s2;
+  double delta = 0.03;
+  double step = delta * ((sMax + sMin)/2);
+  
+  std::cout << "**********\n" << "*   " << s1 << "   *\n" << "*   " << s2 << "   *\n";
+  rnd[0] = (rand() % (int)sMax) + sMin;
+  std::cout << "*   " << std::setprecision(2) << rnd[0] << "   *\n";
+  for (int i = 1; i <= size; i++) {
+    rnd[i] = (rand() % (int)sMax) + rnd[i - 1] + step;
+    std::cout << "*   " << std::setprecision(2) << rnd[i] << "   *\n";
+  }
+  std::cout << "**********" << std::endl;
+  
+  return rnd;
+}
+
 int main(void) {
   FuncParams* params = new FuncParams(1, 5, 0.0792, -2, -0.1);
   // params->funcValues();
@@ -109,6 +132,5 @@ int main(void) {
   //FuncParams* test = ReadPar();
   //test->funcValues();
   Tab(params); 
-  std::cout << "S1: " << params->findMinElemWithStep(2) << std::endl;
-  std::cout << "S2: " << params->findMinElemWithStep(1) << std::endl;
+  rand(params);
 }
