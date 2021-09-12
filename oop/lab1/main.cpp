@@ -1,5 +1,6 @@
 #include <cmath>
 #include <iostream>
+#include <iomanip>
 
 class FuncParams {
   private:
@@ -44,7 +45,7 @@ class FuncParams {
       double* values = new double[getFuncArrayLength()];
       for (double x = x1; x <= x2; x += dx, i++) {
         values[i] = func(x);
-        std::cout << i << ":" << values[i] << std::endl;
+        std::cout << "*   " << std::setprecision(4) << x << "   *   " << std::setprecision(3) << values[i] << "   *\n";
       }
       this->values = values;
     }
@@ -91,16 +92,23 @@ FuncParams* ReadPar() {
   return params;
 }
 
+void  Tab(FuncParams* params) {
+  std::cout << "**************************" << std::endl 
+  << "*     x    *     f(x)    *"  << std::endl;
+  params->funcValues();
+  std::cout << "**************************" << std::endl;
+}
+
 int main(void) {
   FuncParams* params = new FuncParams(1, 5, 0.0792, -2, -0.1);
-  params->funcValues();
+  // params->funcValues();
 
   //FuncParams* test = new FuncParams(1, 6, 0.2083, 0.5, 5.5);
   //test->funcValues();
 
   //FuncParams* test = ReadPar();
   //test->funcValues();
-  
+  Tab(params); 
   std::cout << "S1: " << params->findMinElemWithStep(2) << std::endl;
   std::cout << "S2: " << params->findMinElemWithStep(1) << std::endl;
 }
