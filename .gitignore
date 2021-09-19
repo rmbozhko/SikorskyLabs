@@ -2,3 +2,7 @@
 *.docx
 *.pdf
 complex_algo/lab7/~WRL2997.tmp
+*.xml
+num_meth/lab1/gauss/.idea/.name
+*.iml
+*.class
