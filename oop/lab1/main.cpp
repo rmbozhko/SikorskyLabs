@@ -23,7 +23,7 @@ class FuncParams {
             this->x1 = (x1 < x2) ? x1 : x2;
             this->x2 = (x1 < x2) ? x2 : x1;
       } else {
-        throw "Invalid arguments";
+        throw "Невірні параметри\n";
       }
     }
 
@@ -54,16 +54,14 @@ class FuncParams {
 
     double  func(double arg) {
       if (arg <= -0.7) {
-        return -this->a * pow(arg, 2.0);
+        return (-this->a) * pow(arg, 2.0);
       }
-      return (this->a - arg)/(this->b * arg);
+      return (this->a - arg) / (this->b * arg);
     }
 
-    double  findMinElemWithStep(int step) {
-      double min = this->values[0];
+    double  findMinElemWithStep(int step, double min) {
       int size = this->getFuncArrayLength();
-      
-      for (int i = 0; i < size; i += step) {
+      for (int i = step - 1; i < size; i += step) {
         if (this->values[i] < min) {
           min = this->values[i];
         }
@@ -103,8 +101,8 @@ void  Tab(FuncParams* params) {
 
 double*  rand(FuncParams* params) {
   int size = params->getFuncArrayLength();
-  double s1 = params->findMinElemWithStep(2);
-  double s2 = params->findMinElemWithStep(1);
+  double s1 = params->findMinElemWithStep(2, params->getValue(1));
+  double s2 = params->findMinElemWithStep(1, params->getValue(0));
   double* rnd = new double[size];
   double sMax = (s1 > s2) ? s1 : s2;
   double sMin = (s1 < s2) ? s1 : s2;
