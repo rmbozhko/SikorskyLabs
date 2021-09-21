@@ -2,6 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
+#include <float.h>
 
 class FuncParams {
   private:
@@ -15,8 +16,11 @@ class FuncParams {
   public:
     FuncParams() {}
     FuncParams(int a, int b, double dx, double x1, double x2) {
-      if ((x1 < x2 && dx > 0) || 
-          (x1 > x2 && dx < 0)) {
+      if ((dx < DBL_MAX && dx > -DBL_MAX) && 
+          (x1 < DBL_MAX && x1 > -DBL_MAX) && 
+          (x2 < DBL_MAX && x2 > -DBL_MAX) && 
+          ((x1 < x2 && dx > 0) || 
+          (x1 > x2 && dx < 0))) {
             this->a = a;
             this->b = b;
             this->dx = dx;
@@ -40,7 +44,7 @@ class FuncParams {
     double setX1(double x1) { this->x1 = x1; }
     double setX2(double x2) { this->x2 = x2; }
 
-    int getFuncArrayLength() { return (abs(abs(x2) - abs(x1)) / dx);}
+    int getFuncArrayLength() { return round(abs(abs(x2) - abs(x1)) / dx);}
 
     void funcValues() {
       int i = 0;
@@ -74,6 +78,7 @@ FuncParams* ReadPar() {
   FuncParams* params = new FuncParams();
   int int_temp;
   double double_temp;
+
   std::cout << "Введіть значення параметру a: ";
   scanf("%d", &int_temp);
   params->setA(int_temp);
@@ -99,6 +104,12 @@ void  Tab(FuncParams* params) {
   std::cout << "**************************" << std::endl;
 }
 
+void printNTimes(char c, size_t times) {
+  for(int i = 0; i < times; i++) {
+      printf("%c", c);
+  }
+}
+
 double*  rand(FuncParams* params) {
   int size = params->getFuncArrayLength();
   double s1 = params->findMinElemWithStep(2, params->getValue(1));
@@ -109,14 +120,17 @@ double*  rand(FuncParams* params) {
   double delta = 0.03;
   double step = delta * ((sMax + sMin)/2);
   
-  std::cout << "**********\n" << "*   " << s1 << "   *\n" << "*   " << s2 << "   *\n";
+  printNTimes('_', 16);
+  printf("\n");
+  printf("%c%10.2f%5c\n", 186, s1, 186);
+  printf("%c%10.2f%5c\n", 186, s2, 186);
   rnd[0] = (rand() % (int)sMax) + sMin;
-  std::cout << "*   " << std::setprecision(2) << rnd[0] << "   *\n";
+  printf("%c%10.2f%5c\n", 186, rnd[0], 186);
   for (int i = 1; i < size; i++) {
     rnd[i] = (rand() % (int)sMax) + rnd[i - 1] + step;
-    std::cout << "*   " << std::setprecision(2) << rnd[i] << "   *\n";
+    printf("%c%10.2f%5c\n", 186, rnd[i], 186);
   }
-  std::cout << "**********" << std::endl;
+  printNTimes('_', 16);
 
   return rnd;
 }
@@ -143,10 +157,15 @@ void  Print(FuncParams* params) {
 }
 
 int main(void) {
-  FuncParams* params = new FuncParams(1, 5, 0.0792, -2, -0.1);
-
-  FuncParams* test = ReadPar();
-  Tab(params); 
-  rand(params);
-  Print(params);
+  try {
+    FuncParams* params = new FuncParams(1, 5, 0.0792, -2, -0.1);
+    
+    //FuncParams* test = ReadPar();
+    Tab(params); 
+    rand(params);
+    Print(params);
+  } catch(char const *error) {
+    std::cerr << "Помилка: " << error << std::endl;
+  }
+  return (0);
 }
