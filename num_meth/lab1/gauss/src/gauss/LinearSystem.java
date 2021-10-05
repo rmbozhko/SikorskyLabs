@@ -3,26 +3,22 @@ package gauss;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LinearSystem<N extends Number, T extends Gauss<N, T>> {
-    private List<T> list = new ArrayList<T>();
+public class LinearSystem {
+    private final List<Equation> list = new ArrayList<>();
 
-    public List<T> getList() {
-        return list;
-    }
-
-    public T get(int index){
+    public Equation get(int index) {
         return list.get(index);
     }
 
-    public void push(T elem){
+    public void push(Equation elem) {
         list.add(elem);
     }
 
-    public int size(){
+    public int size() {
         return list.size();
     }
 
-    public N itemAt(int i, int j){
-        return list.get(i).at(j);
+    public Float get(int i, int j) {
+        return list.get(i).get(j);
     }
 }
