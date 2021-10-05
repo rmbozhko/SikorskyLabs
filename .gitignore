@@ -7,3 +7,16 @@ num_meth/lab1/gauss/.idea/.name
 *.iml
 *.class
 main
+*.cmake
+*.txt
+*.bin
+*.exe
+*.check_cache
+*.log
+*.make
+*.internal
+*.stackdump
+*.cbp
+*.marks
+*.o
+*.includecache

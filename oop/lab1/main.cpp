@@ -2,11 +2,15 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
-#include <float.h>
+#include <cfloat>
 
 void drawRow(double a, double b);
 void drawRow(const char *a, const char *b);
 void drawRow(double a);
+
+void drawHeaderRow(int column_number);
+void drawFooterRow(int column_number);
+void drawRawFloor(int column_number);
 
 class FuncParams {
 private:
@@ -18,7 +22,7 @@ private:
     double *values;
 
 public:
-    FuncParams() {}
+    FuncParams() = default;
 
     FuncParams(int a, int b, double dx, double x1, double x2) {
         if ((dx < DBL_MAX && dx > -DBL_MAX) &&
@@ -32,40 +36,46 @@ public:
             this->x1 = (x1 < x2) ? x1 : x2;
             this->x2 = (x1 < x2) ? x2 : x1;
         } else {
-            throw "Невірні параметри\n";
+            throw new std::string("Невірні параметри\n");
         }
     }
 
-    int getA() { return a; }
+    int getA() const { return a; }
 
-    int getB() { return b; }
+    int getB() const { return b; }
 
-    double getDX() { return dx; }
+    double getDX() const { return dx; }
 
-    double getX1() { return x1; }
+    double getX1() const { return x1; }
 
-    double getX2() { return x2; }
+    double getX2() const { return x2; }
 
     double getValue(int i) { return values[i]; }
 
-    void setA(int a) { this->a = a; }
+    void setA(int a_) { this->a = a_; }
 
-    void setB(int b) { this->b = b; }
+    void setB(int b_) { this->b = b_; }
 
-    void setDX(double dx) { this->dx = dx; }
+    void setDX(double dx_) { this->dx = dx_; }
 
-    void setX1(double x1) { this->x1 = x1; }
+    void setX1(double x1_) { this->x1 = x1_; }
 
-    void setX2(double x2) { this->x2 = x2; }
+    void setX2(double x2_) { this->x2 = x2_; }
 
     int getFuncArrayLength() { return round(fabs(fabs(x2) - fabs(x1)) / dx); }
 
     void funcValues() {
         int i = 0;
-        double *values = new double[getFuncArrayLength()];
+        int length = getFuncArrayLength();
+        double *values = new double[length];
         for (double x = x1; x <= x2; x += dx, i++) {
             values[i] = func(x);
             drawRow(x, values[i]);
+            if (i + 1 == length) {
+                drawFooterRow(2);
+            } else {
+                drawRawFloor(2);
+            }
         }
         this->values = values;
     }
@@ -89,7 +99,7 @@ public:
 };
 
 FuncParams *ReadPar() {
-    FuncParams *params = new FuncParams();
+    auto *params = new FuncParams();
     int int_temp;
     double double_temp;
 
@@ -111,14 +121,16 @@ FuncParams *ReadPar() {
     return params;
 }
 
-void printNTimes(std::string str, size_t times) {
+void printNTimes(const std::string& str, size_t times) {
     for (int i = 0; i < times; i++) {
         std::cout << str;
     }
 }
 
 void Tab(FuncParams *params) {
+    drawHeaderRow(2);
     drawRow("x", "f(x)");
+    drawRawFloor(2);
     params->funcValues();
 }
 
@@ -133,15 +145,55 @@ double *rand(FuncParams *params) {
     double delta = 0.03;
     double step = delta * ((sMax + sMin) / 2);
 
-    printf("\n");
+    std::cout << std::endl;
+    drawHeaderRow(1);
     drawRow(s1);
+    drawRawFloor(1);
     drawRow(s2);
+    drawRawFloor(1);
     rnd[0] = (rand() % (int) sMax) + sMin;
     for (int i = 1; i < size; i++) {
         rnd[i] = (rand() % (int) sMax) + rnd[i - 1] + step;
         drawRow(rnd[i]);
+        if (i + 1 == size) {
+            drawFooterRow(1);
+        } else {
+            drawRawFloor(1);
+        }
     }
     return rnd;
+}
+
+void drawFooterRow(int column_number) {
+    if (column_number == 1) {
+        std::string box_horizontal_line = "\u2550";
+        std::cout << "\u255A";
+        printNTimes(box_horizontal_line, 5);
+        std::cout << "\u255D" << std::endl;
+    } else {
+        std::string box_horizontal_line = "\u2550";
+        std::cout << "\u255A";
+        printNTimes(box_horizontal_line, 6);
+        std::cout << "\u2569";
+        printNTimes(box_horizontal_line, 7);
+        std::cout << "\u255D" << std::endl;
+    }
+}
+
+void drawHeaderRow(int column_number) {
+    if (column_number == 1) {
+        std::cout << "\u2554";
+        std::string box_horizontal_line = "\u2550";
+        printNTimes(box_horizontal_line, 5);
+        std::cout << "\u2557" << std::endl;
+    } else {
+        std::cout << "\u2554";
+        std::string box_horizontal_line = "\u2550";
+        printNTimes(box_horizontal_line, 6);
+        std::cout << "\u2566";
+        printNTimes(box_horizontal_line, 7);
+        std::cout << "\u2557" << std::endl;
+    }
 }
 
 void Print(FuncParams *params) {
@@ -166,66 +218,46 @@ void Print(FuncParams *params) {
 }
 
 void drawRow(double a, double b) {
-    std::cout << "\u2554";
-    std::string box_horizontal_line = "\u2550";
-    printNTimes(box_horizontal_line, 6);
-    std::cout << "\u2566";
-    printNTimes(box_horizontal_line, 7);
-    std::cout << "\u2557" << std::endl;
-
     std::cout << "\u2551";
     printf("%5.3f", a);
     std::cout << "\u2551";
     printf("%5.4f", b);
     std::cout << "\u2551" << std::endl;
-
-    std::cout << "\u255A";
-    printNTimes(box_horizontal_line, 6);
-    std::cout << "\u2569";
-    printNTimes(box_horizontal_line, 7);
-    std::cout << "\u255D" << std::endl;
 }
 
 void drawRow(const char *a, const char *b) {
-    std::cout << "\u2554";
-    std::string box_horizontal_line = "\u2550";
-    printNTimes(box_horizontal_line, 6);
-    std::cout << "\u2566";
-    printNTimes(box_horizontal_line, 7);
-    std::cout << "\u2557" << std::endl;
-
     std::cout << "\u2551";
     printf("%4s%2s", a, "");
     std::cout << "\u2551";
     printf("%6s%1s", b, "");
     std::cout << "\u2551" << std::endl;
-
-    std::cout << "\u255A";
-    printNTimes(box_horizontal_line, 6);
-    std::cout << "\u2569";
-    printNTimes(box_horizontal_line, 7);
-    std::cout << "\u255D" << std::endl;
 }
 
 void drawRow(double a) {
-    std::cout << "\u2554";
-    std::string box_horizontal_line = "\u2550";
-    printNTimes(box_horizontal_line, 5);
-    std::cout << "\u2557" << std::endl;
-
     std::cout << "\u2551";
     printf("%5.2f", a);
     std::cout << "\u2551" << std::endl;
-
-    std::cout << "\u255A";
-    printNTimes(box_horizontal_line, 5);
-    std::cout << "\u255D" << std::endl;
-
 }
 
-int main(void) {
+void drawRawFloor(int column_number) {
+    if (column_number == 1) {
+        std::cout << "\u2560";
+        std::string box_horizontal_line = "\u2550";
+        printNTimes(box_horizontal_line, 5);
+        std::cout << "\u2563" << std::endl;
+    } else {
+        std::cout << "\u2560";
+        std::string box_horizontal_line = "\u2550";
+        printNTimes(box_horizontal_line, 6);
+        std::cout << "\u256C";
+        printNTimes(box_horizontal_line, 7);
+        std::cout << "\u2563" << std::endl;
+    }
+}
+
+int main() {
     try {
-        FuncParams *params = new FuncParams(1, 5, 0.0792, -2, -0.1);
+        auto *params = new FuncParams(1, 5, 0.0792, -2, -0.1);
 
         FuncParams* test = ReadPar();
         Tab(params);
