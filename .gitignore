@@ -20,3 +20,5 @@ main
 *.marks
 *.o
 *.includecache
+*.png
+*.gz
