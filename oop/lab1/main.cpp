@@ -1,8 +1,11 @@
 #include <cmath>
 #include <iostream>
-#include <iomanip>
 #include <cstdlib>
 #include <cfloat>
+#include <random>
+#include <algorithm>
+
+#define TRANSFORMATION_CONST -10
 
 void drawRow(double a, double b);
 void drawRow(const char *a, const char *b);
@@ -11,6 +14,8 @@ void drawRow(double a);
 void drawHeaderRow(int column_number);
 void drawFooterRow(int column_number);
 void drawRawFloor(int column_number);
+
+int transformFunction(double, double);
 
 class FuncParams {
 private:
@@ -36,7 +41,7 @@ public:
             this->x1 = (x1 < x2) ? x1 : x2;
             this->x2 = (x1 < x2) ? x2 : x1;
         } else {
-            throw new std::string("Невірні параметри\n");
+            throw "Невірні параметри\n";
         }
     }
 
@@ -62,7 +67,19 @@ public:
 
     void setX2(double x2_) { this->x2 = x2_; }
 
-    int getFuncArrayLength() { return round(fabs(fabs(x2) - fabs(x1)) / dx); }
+    int getFuncArrayLength() {
+        int length;
+        if ((x2 < 0 && x1 < 0) || (x2 > 0 && x1 > 0))  {
+            length = (x2 < x1) ? x1 - x2 : x2 - x1;
+        } else if (x2 < 0 && x1 > 0) {
+            length = x1 - x2;
+        } else if (x2 > 0 && x1 < 0) {
+            length = x2 - x1;
+        } else {
+            length = fabs(x2 - x1);
+        }
+        return ((++length) / dx) - 2;
+    }
 
     void funcValues() {
         int i = 0;
@@ -71,12 +88,9 @@ public:
         for (double x = x1; x <= x2; x += dx, i++) {
             values[i] = func(x);
             drawRow(x, values[i]);
-            if (i + 1 == length) {
-                drawFooterRow(2);
-            } else {
-                drawRawFloor(2);
-            }
+            if (i < length) drawRawFloor(2);
         }
+        drawFooterRow(2);
         this->values = values;
     }
 
@@ -95,6 +109,10 @@ public:
             }
         }
         return min;
+    }
+
+    double *getValues() {
+        return values;
     }
 };
 
@@ -134,7 +152,6 @@ void Tab(FuncParams *params) {
     params->funcValues();
 }
 
-
 double *rand(FuncParams *params) {
     int size = params->getFuncArrayLength();
     double s1 = params->findMinElemWithStep(2, params->getValue(1));
@@ -151,9 +168,14 @@ double *rand(FuncParams *params) {
     drawRawFloor(1);
     drawRow(s2);
     drawRawFloor(1);
-    rnd[0] = (rand() % (int) sMax) + sMin;
+
+    std::mt19937 gen(time(0));
+    std::uniform_real_distribution<> urd(sMin, sMax);
+
+    rnd[0] = urd(gen);
     for (int i = 1; i < size; i++) {
-        rnd[i] = (rand() % (int) sMax) + rnd[i - 1] + step;
+        urd = std::uniform_real_distribution<>(rnd[i - 1] + step, sMax);
+        rnd[i] = urd(gen);
         drawRow(rnd[i]);
         if (i + 1 == size) {
             drawFooterRow(1);
@@ -200,8 +222,10 @@ void Print(FuncParams *params) {
     std::cout << "\n\n\nY\n^" << std::endl;
     int size = params->getFuncArrayLength();
     int max = 0;
+    double *min = std::max_element(params->getValues(), params->getValues() + params->getFuncArrayLength());
     for (int i = 0; i < size; i++) {
-        int spaces_len = (int) (params->getValue(i) * (-10));
+
+        int spaces_len = transformFunction(params->getValue(i), *min);
         if (spaces_len > max) {
             max = spaces_len;
         }
@@ -217,6 +241,10 @@ void Print(FuncParams *params) {
     std::cout << "> X" << std::endl;
 }
 
+int transformFunction(double value, double minValue) {
+    return (int) ((value - minValue) * (TRANSFORMATION_CONST));
+}
+
 void drawRow(double a, double b) {
     std::cout << "\u2551";
     printf("%5.3f", a);
@@ -226,11 +254,11 @@ void drawRow(double a, double b) {
 }
 
 void drawRow(const char *a, const char *b) {
-    std::cout << "\u2551";
+    std::cout << "\u2502";
     printf("%4s%2s", a, "");
-    std::cout << "\u2551";
+    std::cout << "\u2502";
     printf("%6s%1s", b, "");
-    std::cout << "\u2551" << std::endl;
+    std::cout << "\u2502" << std::endl;
 }
 
 void drawRow(double a) {
