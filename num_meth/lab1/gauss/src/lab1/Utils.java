@@ -1,4 +1,4 @@
-package gauss;
+package lab1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,18 +46,6 @@ public class Utils {
         return list;
     }
 
-    public static void printSystem(LinearSystem system) {
-        for (int i = 0; i < system.size(); i++) {
-            Equation temp = system.get(i);
-            StringBuilder s = new StringBuilder();
-            for (int j = 0; j < temp.size(); j++) {
-                s.append(String.format("%f; %s", system.get(i, j), "\t"));
-            }
-            System.out.println(s);
-        }
-        System.out.println();
-    }
-
     public static void printVector(List<Float> x) {
         StringBuilder s = new StringBuilder();
         for (int i = 0; i < x.size(); i++) {
@@ -66,27 +54,17 @@ public class Utils {
         System.out.println(s);
     }
 
-    public static boolean checkSystem(LinearSystem system) {
-        if (system.size() < 2) return false;
-        for (int i = 0; i < system.size(); i++) {
-            if (system.get(i).size() != (system.size() + 1)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public static Float calculateCoefficient(Float a, Float b) {
         if (a == 0.0f) return 1.0f;
         return -b / a;
     }
 
 
-    public static List<Float> multiplyEquations(List<Float> equation, Float coefficient) {
-        return equation.stream().map(elem -> elem * coefficient).collect(Collectors.toList());
+    public static List<Float> multiplyEquationByConstant(Equation equation, Float coefficient) {
+        return equation.getEquation().stream().map(elem -> elem * coefficient).collect(Collectors.toList());
     }
 
-    public static List<Float> addEquations(List<Float> a, List<Float> b) {
+    public static List<Float> addEquations(Equation a, Equation b) {
         assert a.size() == b.size();
 
         List<Float> updatedEquation = new ArrayList<>(a.size());
