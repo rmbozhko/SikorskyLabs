@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 5</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>ТР-02, Божко Роман Вячеславович, Варіант №3</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Завдання</th>
+                <th>Рішення</th>
+                <th>Результат</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>
+                    Напишіть функцію, що шукає послідовність b1..bn , що
+                    розраховується за формулою bі=((-1)^(і+1))*і, де і=1,..., n; n та
+                    крок - задає користувач. Результат зберігається в масиві.
+                    Вивести отриманий масив.
+                    Потім вставити в кінець масиву Х (вводить користувач)
+                    останніх перевернутих елементів початкового масиву.
+                    Вивести отриманий масив, вставлену частину виділити
+                    іншим кольором.
+                </th>
+                <td><button onclick="task1()">Виконати 1 завдання</button></td>
+                <td>
+                    <div id="first-assignment-first-part-result"></div>
+                    <div id="first-assignment-second-part-result"></div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Створити двовимірний масив NxN. Всі елементи нижче
+                    головної діагоналі дорівнюють 1. Інші довільні, але відмінні
+                    від 1. Вивести отриманий масив.
+                </th>
+                <td><button onclick="task2()">Виконати 2 завдання</button></td>
+                <td><div id="second-assignment-result"></div></td>
+            </tr>
+            <tr>
+                <th>
+                    Створити асоціативний масив, в який додати елементи з
+                    даними про користувача. Додати значення Прізвище, Ім’я,
+                    По батькові, Група. Зробити перевірку чи співпадає група з
+                    «ТМ-91». Вивести ключі з даними.
+                </th>
+                <td><button onclick="task3()">Виконати 3 завдання</button></td>
+                <td><div id="third-assignment-result"></div></td>
+            </tr>
+        </tbody>
+    </table>
+    <script src="script.js" type="text/javascript" defer></script>
+</body>
+</html>

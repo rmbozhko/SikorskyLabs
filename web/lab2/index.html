@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+	<div class="container">
+		<h1 id="main">Форми HTML і позиціювання</h1>
+		<div class="author">
+			<h4>Лабораторна робота №2. Виконавець: Божко Роман Вячеславович, ТР-02</h4>
+		</div>
+		<div class="row">
+			<div class="column float_elements">
+				<img src="https://upload.wikimedia.org/wikipedia/en/7/7d/Lenna_%28test_image%29.png" class="float_picture left">
+				<p>
+					Позиционированием называется положение элемента в системе координат.
+					Различают четыре типа позиционирования: нормальное, абсолютное, фиксированное и относительное.
+					В зависимости от типа, который устанавливается через свойство position, изменяется и система координат.
+					Благодаря комбинации свойств position, left, top, right и bottom элемент можно накладывать один на другой, выводить в точке с определёнными координатами, фиксировать в указанном месте, определить положение одного элемента относительно другого и др. <img src="https://upload.wikimedia.org/wikipedia/en/7/7d/Lenna_%28test_image%29.png" class="float_picture right">
+					Подобно другим свойствам CSS управление позиционированием доступно через скрипты. Таким образом, можно динамически изменять положение элементов без перезагрузки страницы, создавая анимацию и различные эффекты.
+				</p>
+				<img src="https://upload.wikimedia.org/wikipedia/en/7/7d/Lenna_%28test_image%29.png" class="float_picture">
+			</div>
+			<div class="column pictures_positioning center">
+					<img src="https://upload.wikimedia.org/wikipedia/en/7/7d/Lenna_%28test_image%29.png" class="cascade_picture first">
+					<img src="https://upload.wikimedia.org/wikipedia/en/7/7d/Lenna_%28test_image%29.png" class="cascade_picture second">
+					<img src="https://upload.wikimedia.org/wikipedia/en/7/7d/Lenna_%28test_image%29.png" class="cascade_picture third">
+			</div>
+		</div>
+		<div style="position: absolute;">
+			<a href="#main"><img src="https://www.pinclipart.com/picdir/middle/139-1396849_up-scroll-arrow-comments-dark-grey-aluminium-frame.png" class="scroller"></a>
+		</div>
+		<div style="font-size: 0; position: sticky; top: 0%;">
+		<a href="#signup_form"><div class="nav_menu menu_item"><p>Форма реєстрації</p></div></a>
+		<a href="#login_form"><div class="nav_menu menu_item"><p>Форма входу</p></div></a>
+		<a href="#feedback_form"><div class="nav_menu menu_item"><p>Форма зворотнього звя'зку</p></div></a>
+		</div>
+		<div class="signup_form">
+			<form name="signup_form" autocomplete="on" id="signup_form"	accept-charset="utf-8">
+				<p>Форма реєстрації:</p>
+				<div class="row">
+					<div class="column">
+						<img src="https://cdn-icons-png.flaticon.com/512/15/15081.png" class="signup_pic"><br>
+						<label for="name">Ім'я</label><br>
+						<input type="text" id="name" placeholder="Ім'я"><br>
+						<label for="surname">Призвіще</label><br>
+						<input type="text" id="surname" placeholder="Призвіще"><br>
+						<label>Стать</label><br>
+						<div style="display: inline-block;">
+						<label for="male">
+							<input type="radio" id="male" value="male"/>Чоловіча
+						</label>
+						<label for="female">
+							<input type="radio" id="female" value="female"/>Жіноча
+						</label></div>
+						<label for="age">Вік</label>
+						<input type="number" id="age" placeholder="21"><br>
+						<label for="birthday">Дата народження</label>
+						<input type="date" id="birthday"><br>
+					</div>
+					<div class="column">
+						<label for="country_of_origin">Країна проживання</label><br>
+						<input list="countries" id="country_of_origin" name="country" placeholder="Оберіть країну проживання">
+						<datalist id="countries">
+							<option value="Країна №1"/>
+							<option value="Країна №2"/>
+							<option value="Країна №3"/>
+						</datalist><br>
+						<label for="phone">Номер телефону</label><br>
+						<input type="tel" id="phone" placeholder="+38(0XX)XXX-XX-XX"><br>
+						<label for="social_media">Соцмережа</label><br>
+						<input type="url" id="social_media" placeholder="Посилання на соц. мережу"><br>
+						<label for="email">Електронна пошта</label><br>
+						<input type="email" id="email" placeholder="Ел. пошта"><br>
+						<label for="password">Пароль</label><br>
+						<input type="password" id="password" placeholder="Пароль"><br>
+						<input type="checkbox" id="read_agreement" name="read_agreement" required="off">
+						<label class="read_agreement_label" for="read_agreement">Чи згідні Ви з умовами?</label><br>
+					</div>
+				</div>
+				<div class="center signup_form_buttons">
+				<button type="submit" style="margin: 0px 100px;">Зареєструватися</button>
+				<button type="reset">Відміна</button>
+				</div>
+			</form>
+		</div>
+		<div class="login_form">
+			<form name="login_form" autocomplete="on" id="login_form" accept-charset="utf-8">
+				<p>Форма входу</p>
+				<input type="text" placeholder="Логін"><br>
+				<input type="password" placeholder="Пароль"><br>
+				<button type="submit" class="login">Вхід</button>
+			</form>
+		</div>
+		<div class="feedback_form">
+			<form name="feedback_form" autocomplete="on" id="feedback_form" accept-charset="utf-8">
+				<p>Форма зворотнього звя'зку</p>
+				<div class="row">
+					<div class="column center">
+						<input type="text" placeholder="Ім'я" name="feedback_giver_name" minlength="1"><br>
+						<input type="email" placeholder="Ел. пошта" name="feedback_giver_nameail"><br>
+						<input list="topics" name="topic" placeholder="Тема повідомлення"><br>
+						<datalist id="topics">
+							<option value="Тема №1"/>
+							<option value="Тема №2"/>
+							<option value="Тема №3"/>
+						</datalist>
+						<button type="submit">Відправити</button>
+					</div>
+					<div class="column">
+						<textarea cols="58" rows="9" placeholder="Повідомлення"></textarea>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div>
+			<div class="row">
+				<div class="social_media_block"><p>Посилання на <br> соц. мережі</p></div>
+			</div>
+			<div class="row">
+				<div class="social_media_block">
+					<a href="https://twitter.com/?lang=en"><img src="https://cdn4.iconfinder.com/data/icons/social-media-icons-the-circle-set/48/twitter_circle-512.png" class="social_media_pic"></a>
+					<a href="https://www.snapchat.com/"><img src="https://cdn3.iconfinder.com/data/icons/popular-services-brands/512/snapchat-2-512.png" class="social_media_pic"></a>
+					<a href="https://telegram.org/"><img src="https://cdn3.iconfinder.com/data/icons/popular-services-brands-vol-2/512/telegram-512.png" class="social_media_pic"></a>
+					<a href="https://www.instagram.com/"><img src="https://www.shareicon.net/data/2016/11/16/854129_round_512x512.png" class="social_media_pic"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

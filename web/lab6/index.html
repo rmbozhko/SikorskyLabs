@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 5</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>ТР-02, Божко Роман Вячеславович, Варіант №3</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Завдання</th>
+                <th>Рішення</th>
+                <th>Результат</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>
+                    Створити об’єкт «Користувач» з властивостями «Прізвище», «Ім’я».
+                </th>
+                <td><button onclick="task1()">Виконати 1 завдання</button></td>
+                <td>
+                    <div id="first-assignment-result"></div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Створити об’єкт «Студент», що містить властивості «Спеціальність», «Група» і методи: додати, змінити, видалити дані.
+                </th>
+                <td><button onclick="task2()">Виконати 2 завдання</button></td>
+                <td><div id="second-assignment-result"></div></td>
+            </tr>
+            <tr>
+                <th>
+                    Реалізувати копіювання властивостей і методів об’єктів «Користувач» і «Студент».
+                </th>
+                <td><button onclick="task3()">Виконати 3 завдання</button></td>
+                <td><div id="third-assignment-result"></div></td>
+            </tr>
+            <tr>
+                <th>
+                    Додати в прототип об’єкту «Студент» метод «Показати дані».
+                </th>
+                <td><button onclick="task4()">Виконати 4 завдання</button></td>
+                <td><div id="fourth-assignment-result"></div></td>
+            </tr>
+            <tr>
+                <th>
+                    Створити об’єкт «Успішність», що наслідує властивості і методи об’єкту «Студент» і має додаткові властивості «Предмети»,
+                    «Оцінки» і метод «Розрахунок середнього балу». Перевизначити в об’єкті «Успішність» метод «Показати дані».
+                </th>
+                <td><button onclick="task5()">Виконати 5 завдання</button></td>
+                <td><div id="fifth-assignment-result"></div></td>
+            </tr>
+            <tr>
+                <th>
+                    Реалізувати класи «Студент» і «Успішність» з такими же методами і властивостями як і попередні об’єкти. «Успішність»
+                    наслідує методи та властивості від «Студент». При реалізації використовувати геттери і сеттери, наприклад, для перевірки 
+                    даних чи виведення в різних виглядах інформацію.
+                </th>
+                <td><button onclick="task6()">Виконати 6 завдання</button></td>
+                <td><div id="sixth-assignment-result"></div></td>
+            </tr>
+        </tbody>
+    </table>
+    <script src="script.js" type="text/javascript" defer></script>
+</body>
+</html>
