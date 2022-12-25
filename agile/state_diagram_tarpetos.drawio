@@ -1,0 +1,68 @@
+<mxfile host="65bd71144e">
+    <diagram name="Page-1" id="58cdce13-f638-feb5-8d6f-7d28b1aa9fa0">
+        <mxGraphModel dx="2007" dy="574" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="zZcN5XMTq2NgF7rOnlSp-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.003;entryY=0.487;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.009;exitY=0.468;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="zZcN5XMTq2NgF7rOnlSp-1" target="zZcN5XMTq2NgF7rOnlSp-2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="zZcN5XMTq2NgF7rOnlSp-9" value="контактування з співробітником органу &lt;br&gt;місцевого самоврядування &amp;nbsp;&lt;br&gt;[є документи, котрі підтверджують проживання в м-районі] /&lt;br&gt;реєстрація в інформаційній системі" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="zZcN5XMTq2NgF7rOnlSp-8" vertex="1" connectable="0">
+                    <mxGeometry x="-0.5924" y="-1" relative="1" as="geometry">
+                        <mxPoint x="139" y="1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="zZcN5XMTq2NgF7rOnlSp-1" value="Невідомий&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20style%3D%22edgeStyle%3DorthogonalEdgeStyle%3Brounded%3D0%3BorthogonalLoop%3D1%3BjettySize%3Dauto%3Bhtml%3D1%3BexitX%3D-0.013%3BexitY%3D0.433%3BexitDx%3D0%3BexitDy%3D0%3BentryX%3D0.992%3BentryY%3D0.533%3BentryDx%3D0%3BentryDy%3D0%3BentryPerimeter%3D0%3BfontFamily%3DHelvetica%3BfontSize%3D12%3BfontColor%3Drgb(0%2C%200%2C%200)%3BexitPerimeter%3D0%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22388.8299999999999%22%20y%3D%22457.31999999999994%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22339.03999999999996%22%20y%3D%22461.98%22%20as%3D%22targetPoint%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-120" y="90" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="zZcN5XMTq2NgF7rOnlSp-2" value="Зареєстрований житель" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="470" y="90" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="zZcN5XMTq2NgF7rOnlSp-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.017;entryY=0.504;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#000000;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="zZcN5XMTq2NgF7rOnlSp-2" target="zZcN5XMTq2NgF7rOnlSp-4" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="570" y="290" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="520" y="150"/>
+                            <mxPoint x="520" y="290"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="zZcN5XMTq2NgF7rOnlSp-18" value="Житель зайшов у приватний кабінет і активував його натиснувши на відповідну кнопку&lt;br&gt;[логін та пароль введені вірно] /&lt;br&gt;Проінформувати жителя про наяність інструкції по роботі з інформ. системою" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="zZcN5XMTq2NgF7rOnlSp-17" vertex="1" connectable="0">
+                    <mxGeometry x="0.2144" y="-1" relative="1" as="geometry">
+                        <mxPoint x="53" y="1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="zZcN5XMTq2NgF7rOnlSp-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.496;entryY=-0.015;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#000000;exitX=0.5;exitY=1.011;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="zZcN5XMTq2NgF7rOnlSp-4" target="zZcN5XMTq2NgF7rOnlSp-5" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="zZcN5XMTq2NgF7rOnlSp-20" value="Адміністратор видаляє жителя за допомогою інформаційної системи\&lt;br&gt;[вказаний житель більше не проживає у відповідному м-районі]" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="zZcN5XMTq2NgF7rOnlSp-19" vertex="1" connectable="0">
+                    <mxGeometry x="-0.185" y="-2" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="zZcN5XMTq2NgF7rOnlSp-4" value="Активний житель" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="45" y="260" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="zZcN5XMTq2NgF7rOnlSp-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.491;exitY=1.009;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="zZcN5XMTq2NgF7rOnlSp-5" target="zZcN5XMTq2NgF7rOnlSp-11" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="zZcN5XMTq2NgF7rOnlSp-5" value="Видалений житель" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="45" y="400" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="zZcN5XMTq2NgF7rOnlSp-11" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="350" y="455" width="30" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="zZcN5XMTq2NgF7rOnlSp-13" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="-90" width="30" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="zZcN5XMTq2NgF7rOnlSp-14" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#000000;rounded=0;exitX=0.495;exitY=0.864;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.375;entryY=-0.021;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="zZcN5XMTq2NgF7rOnlSp-13" target="zZcN5XMTq2NgF7rOnlSp-1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="105" y="80" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
