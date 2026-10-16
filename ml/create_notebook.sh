@@ -1,0 +1,1 @@
+docker run -p 8888:8888 --name notebook -v ${PWD}:/home/jovyan/work -e JUPYTER_ENABLE_LAB=yes -it jupyter/scipy-notebook:latest
